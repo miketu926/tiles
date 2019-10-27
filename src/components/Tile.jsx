@@ -5,7 +5,7 @@ function Tile({ letter }) {
   const [selected, setSelected] = useState(false);
 
   return (
-    <TileWrapper>
+    <TileWrapper onClick={() => setSelected(!selected)}>
       {letter}
     </TileWrapper>
   );

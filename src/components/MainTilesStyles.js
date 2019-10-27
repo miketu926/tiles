@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 export const MainWrapper = styled.div`
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 `
 
 export const Board = styled.div`
