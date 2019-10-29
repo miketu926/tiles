@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import Tile from './Tile'
-import { MainWrapper, Board, Selection } from './MainTilesStyles'
-import './MainTiles.css'
+import Tile from './Tile';
+import {
+  MainWrapper, Board,
+  InputWrapper, Selection,
+  Validity
+} from './MainTilesStyles';
 
 function MainTiles() {
   const testBoard1 = require('../util/test_board_1.json').board;
@@ -14,9 +17,9 @@ function MainTiles() {
   const [wordFound, setWordFound] = useState(false);
 
   useEffect(() => {
+    setTiles([...testBoard2])
     if (set.has(selectedTiles.join("").toLocaleLowerCase())) setWordFound(true);
     if (!set.has(selectedTiles.join("").toLocaleLowerCase())) setWordFound(false);
-    setTiles([...testBoard2])
   }, [selectedTiles])
 
   const renderBoard = tiles.map((letter, i) => {
@@ -32,11 +35,10 @@ function MainTiles() {
   return (
     <MainWrapper>
       <Board>{renderBoard}</Board>
-      <Selection>{selectedTiles}
-        <div className={wordFound ? 'valid' : 'invalid'}>
-          {wordFound ? 'valid' : 'invalid'}
-        </div>
-      </Selection>
+      <InputWrapper className='flex-row'>
+        <Selection found={wordFound}>{selectedTiles}</Selection>
+        <Validity found={wordFound} />
+      </InputWrapper>
     </MainWrapper>
   );
 }

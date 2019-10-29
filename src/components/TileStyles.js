@@ -15,4 +15,4 @@ export const TileWrapper = styled.div`
   width: 60px;
   height: 60px;
   cursor: pointer;
-`
+`;
