@@ -8,22 +8,12 @@ function Tile({ idx, letter, selectedTiles, setSelectedTiles, wordFound }) {
   useEffect(() => {
     if (selected) setSelectedTiles([...selectedTiles, letter]);
     if (!selected) setSelectedTiles(removeLetter(selectedTiles, letter));
-
-    // if (selected) {
-    //   let newState = selectedTiles;
-    //   newState[idx] = letter;
-    //   setSelectedTiles({ ...newState });
-    // } else if (!selected) {
-    //   let newState = selectedTiles;
-    //   newState[idx] = "";
-    //   setSelectedTiles({ ...newState })
-    // }
-
   }, [selected])
 
   return (
     <TileWrapper
       found={wordFound}
+      selected={selected}
       onClick={() => setSelected(!selected)}
     >
       {letter}

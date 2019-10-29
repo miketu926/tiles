@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Tile from './Tile'
-import { MainWrapper, Board } from './MainTilesStyles'
+import { MainWrapper, Board, Selection } from './MainTilesStyles'
+import './MainTiles.css'
 
 function MainTiles() {
   const testBoard1 = require('../util/test_board_1.json').board;
@@ -8,18 +9,8 @@ function MainTiles() {
   const dictionary = require('../util/dictionary.json').words;
   const set = new Set(dictionary);
 
-  // const preLoadedState = {
-  //   0: '', 1: '', 2: '', 3: '',
-  //   4: '', 5: '', 6: '', 7: '',
-  //   8: '', 9: '', 10: '', 11: '',
-  //   12: '', 13: '', 14: '', 15: ''
-  // };
-
   const [tiles, setTiles] = useState([]);
-  // const [selectedTiles, setSelectedTiles] = useState(preLoadedState);
   const [selectedTiles, setSelectedTiles] = useState([]);
-  // const [globalPos, setGlobalPos] = useState(0);
-  // const [posDiff, setPosDiff] = useState(0);
   const [wordFound, setWordFound] = useState(false);
 
   useEffect(() => {
@@ -35,22 +26,17 @@ function MainTiles() {
       selectedTiles={selectedTiles}
       setSelectedTiles={setSelectedTiles}
       wordFound={wordFound}
-    // globalPos={globalPos}
-    // setGlobalPos={setGlobalPos}
-    // posDiff={posDiff}
-    // setPosDiff={setPosDiff}
     />
   })
 
   return (
     <MainWrapper>
-      <Board>
-        {renderBoard}
-      </Board>
-      {selectedTiles}
-      {/* {Object.values(selectedTiles)} */}
-      <div>{dictionary}</div>
-      <div>ABC</div>
+      <Board>{renderBoard}</Board>
+      <Selection>{selectedTiles}
+        <div className={wordFound ? 'valid' : 'invalid'}>
+          {wordFound ? 'valid' : 'invalid'}
+        </div>
+      </Selection>
     </MainWrapper>
   );
 }

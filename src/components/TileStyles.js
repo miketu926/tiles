@@ -8,7 +8,9 @@ export const TileWrapper = styled.div`
   font-family: Arial, Helvetica, sans-serif;
   font-size: 30px;
   font-weight: bold;
-  border: ${p => p.found ? '2px solid green' : '2px solid red'};
+  color: white;
+  border: ${p => p.found && p.selected ? '2px solid green' : '2px solid red'};
+  background-color: ${p => p.found && p.selected ? 'green' : 'orange'};
   border-radius: 10px;
   width: 60px;
   height: 60px;

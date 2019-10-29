@@ -17,3 +17,9 @@ export const Board = styled.div`
 
   border: 1px solid black;
 `
+
+export const Selection = styled.div`
+  height: 75px;
+  width: 300px;
+  border: 1px solid black;
+`
