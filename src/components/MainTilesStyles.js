@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const MainWrapper = styled.div`
   display: grid;
-  grid-template-rows: 10% 40% 40% 10%;
+  grid-template-rows: 10% 10% 10% 10% 10% 40% 10%;
   grid-template-columns: 10% 40% 40% 10%;
   height: 100vh;
   justify-content: center;
@@ -12,13 +12,12 @@ export const Board = styled.div`
   display: grid;
   grid-template-rows: repeat(4, 1fr);
   grid-template-columns: repeat(4, 1fr);
-  place-items: center;
+  place-items: end;
 
   width: 300px;
   height: 300px;
 
-  border: 1px solid black;
-  grid-row: 2/3;
+  grid-row: 2/6;
   grid-column: 2/3;
   justify-self: end;
   align-self: end;
@@ -35,7 +34,7 @@ export const InputWrapper = styled.div`
   justify-content: space-between;
   padding: 0px 15px;
 
-  grid-row: 2/3;
+  grid-row: 5/6;
   grid-column: 3/4;
   align-self: end;
   margin-left: 10px;
@@ -57,3 +56,15 @@ export const Validity = styled.div`
     content: '${p => p.found ? 'valid' : 'invalid'}';
   }
 `;
+
+export const ClearWrapper = styled.div`
+  grid-row: 2/3;
+  grid-column: 3/4;
+  display:flex;
+  flex-direction: row;
+  color: gray;
+  height: 30px;
+  cursor: pointer;
+  width: 130px;
+  margin-left: 215px;
+`

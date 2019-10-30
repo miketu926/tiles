@@ -10,7 +10,7 @@ export const TileWrapper = styled.div`
   font-weight: bold;
   color: white;
   border: ${p => p.found && p.selected ? '2px solid green' : '2px solid red'};
-  background-color: ${p => p.found && p.selected ? 'green' : 'orange'};
+  background-color: ${p => p.found && p.selected ? 'green' : p.selected ? 'red' : 'orange'};
   border-radius: 10px;
   width: 60px;
   height: 60px;

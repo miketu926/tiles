@@ -3,7 +3,7 @@ import Tile from './Tile';
 import {
   MainWrapper, Board,
   InputWrapper, Selection,
-  Validity
+  Validity, ClearWrapper
 } from './MainTilesStyles';
 
 function MainTiles() {
@@ -16,26 +16,53 @@ function MainTiles() {
   const [selectedTiles, setSelectedTiles] = useState([]);
   const [wordFound, setWordFound] = useState(false);
 
+  const [firstRender, setFirstRender] = useState(false)
+  const [renderBoard, setRenderBoard] = useState([]);
+  const [clear, setClear] = useState(false);
+
   useEffect(() => {
     setTiles([...testBoard2])
+    if (firstRender) {
+      setRenderBoard(tiles.map((letter, i) => {
+        return <Tile
+          key={i} idx={i}
+          letter={letter}
+          selectedTiles={selectedTiles}
+          setSelectedTiles={setSelectedTiles}
+          wordFound={wordFound}
+        />
+      }));
+      setFirstRender(false);
+    }
+
+    setFirstRender(true)
     if (set.has(selectedTiles.join("").toLocaleLowerCase())) setWordFound(true);
     if (!set.has(selectedTiles.join("").toLocaleLowerCase())) setWordFound(false);
-  }, [selectedTiles])
+  }, [selectedTiles, firstRender])
 
-  const renderBoard = tiles.map((letter, i) => {
-    return <Tile
-      key={i} idx={i}
-      letter={letter}
-      selectedTiles={selectedTiles}
-      setSelectedTiles={setSelectedTiles}
-      wordFound={wordFound}
-    />
-  })
+  // const renderBoard = tiles.map((letter, i) => {
+  //   return <Tile
+  //     key={i} idx={i}
+  //     letter={letter}
+  //     selectedTiles={selectedTiles}
+  //     setSelectedTiles={setSelectedTiles}
+  //     wordFound={wordFound}
+  //   />
+  // })
+
+  const handleClear = e => {
+    e.preventDefault();
+    console.log("CLICKED")
+    setSelectedTiles([])
+  }
 
   return (
     <MainWrapper>
       <Board>{renderBoard}</Board>
-      <InputWrapper className='flex-row'>
+      <ClearWrapper onClick={e => handleClear(e)}>
+        <div>clear word</div><div>X</div>
+      </ClearWrapper>
+      <InputWrapper>
         <Selection found={wordFound}>{selectedTiles}</Selection>
         <Validity found={wordFound} />
       </InputWrapper>
