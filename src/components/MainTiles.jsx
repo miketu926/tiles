@@ -38,6 +38,9 @@ function MainTiles() {
     setFirstRender(true)
     if (set.has(selectedTiles.join("").toLocaleLowerCase())) setWordFound(true);
     if (!set.has(selectedTiles.join("").toLocaleLowerCase())) setWordFound(false);
+
+
+
   }, [selectedTiles, firstRender])
 
   // const renderBoard = tiles.map((letter, i) => {
