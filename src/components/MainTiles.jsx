@@ -3,7 +3,8 @@ import Tile from './Tile';
 import {
   MainWrapper, Board,
   InputWrapper, Selection,
-  Validity, ClearWrapper
+  Validity, ClearWrapper,
+  ClearWord, ClearX, InnerX
 } from './MainTilesStyles';
 
 function MainTiles() {
@@ -12,58 +13,46 @@ function MainTiles() {
   const dictionary = require('../util/dictionary.json').words;
   const set = new Set(dictionary);
 
-  const [tiles, setTiles] = useState([]);
+  //set initial board state with testBoard1 or testBoard2
+  const [tiles] = useState([...testBoard2]);
+  const [renderBoard, setRenderBoard] = useState([]);
+
   const [selectedTiles, setSelectedTiles] = useState([]);
   const [wordFound, setWordFound] = useState(false);
-
-  const [firstRender, setFirstRender] = useState(false)
-  const [renderBoard, setRenderBoard] = useState([]);
   const [clear, setClear] = useState(false);
 
   useEffect(() => {
-    setTiles([...testBoard2])
-    if (firstRender) {
-      setRenderBoard(tiles.map((letter, i) => {
-        return <Tile
-          key={i} idx={i}
-          letter={letter}
-          selectedTiles={selectedTiles}
-          setSelectedTiles={setSelectedTiles}
-          wordFound={wordFound}
-        />
-      }));
-      setFirstRender(false);
-    }
+    setRenderBoard(tiles.map((letter, i) => {
+      return <Tile
+        key={i} idx={i}
+        letter={letter}
+        selectedTiles={selectedTiles}
+        setSelectedTiles={setSelectedTiles}
+        wordFound={wordFound}
+        clear={clear}
+        setClear={setClear}
+      />
+    }));
 
-    setFirstRender(true)
-    if (set.has(selectedTiles.join("").toLocaleLowerCase())) setWordFound(true);
-    if (!set.has(selectedTiles.join("").toLocaleLowerCase())) setWordFound(false);
+    if (set.has(selectedTiles.join("").toLowerCase())) setWordFound(true);
+    if (!set.has(selectedTiles.join("").toLowerCase())) setWordFound(false);
 
-
-
-  }, [selectedTiles, firstRender])
-
-  // const renderBoard = tiles.map((letter, i) => {
-  //   return <Tile
-  //     key={i} idx={i}
-  //     letter={letter}
-  //     selectedTiles={selectedTiles}
-  //     setSelectedTiles={setSelectedTiles}
-  //     wordFound={wordFound}
-  //   />
-  // })
+  }, [selectedTiles, wordFound])
 
   const handleClear = e => {
     e.preventDefault();
-    console.log("CLICKED")
-    setSelectedTiles([])
+    setClear(true);
+    setSelectedTiles([]);
   }
 
   return (
     <MainWrapper>
       <Board>{renderBoard}</Board>
       <ClearWrapper onClick={e => handleClear(e)}>
-        <div>clear word</div><div>X</div>
+        <ClearWord>clear word</ClearWord>
+        <ClearX>
+          <InnerX>X</InnerX>
+        </ClearX>
       </ClearWrapper>
       <InputWrapper>
         <Selection found={wordFound}>{selectedTiles}</Selection>

@@ -6,11 +6,13 @@ export const TileWrapper = styled.div`
   align-items: center;
 
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 30px;
+  text-shadow: -1px -1px 2px gray;
+  font-size: 28px;
   font-weight: bold;
   color: white;
-  border: ${p => p.found && p.selected ? '2px solid green' : '2px solid red'};
-  background-color: ${p => p.found && p.selected ? 'green' : p.selected ? 'red' : 'orange'};
+  border: ${p => p.wordFound && p.selected ? '2px solid #628a33' : '2px solid #cc0000'};
+  background-image: ${p => p.wordFound && p.selected ? 'linear-gradient(#b5f36d, #628a33)'
+    : p.selected ? 'linear-gradient(#ff4c4c, #840000)' : 'linear-gradient(#FFCA28, #FB8C00)'};
   border-radius: 10px;
   width: 60px;
   height: 60px;

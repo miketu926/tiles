@@ -2,17 +2,23 @@ import React, { useState, useEffect } from 'react';
 import { TileWrapper } from './TileStyles';
 import { removeLetter } from '../util/helpful_functions';
 
-function Tile({ idx, letter, selectedTiles, setSelectedTiles, wordFound }) {
+function Tile({ letter, selectedTiles, setSelectedTiles, wordFound, clear, setClear }) {
   const [selected, setSelected] = useState(false);
 
   useEffect(() => {
     if (selected) setSelectedTiles([...selectedTiles, letter]);
     if (!selected) setSelectedTiles(removeLetter(selectedTiles, letter));
-  }, [selected])
+
+    if (clear) {
+      setSelected(false);
+      setClear(false);
+    };
+
+  }, [selected, clear])
 
   return (
     <TileWrapper
-      found={wordFound}
+      wordFound={wordFound}
       selected={selected}
       onClick={() => setSelected(!selected)}
     >

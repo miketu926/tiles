@@ -27,9 +27,9 @@ export const Board = styled.div`
 export const InputWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  height: 75px;
+  height: 60px;
   width: 270px;
-  border: 1px solid black;
+  border: 2px solid #a5a5a5;
   align-items: center;
   justify-content: space-between;
   padding: 0px 15px;
@@ -45,12 +45,13 @@ export const Selection = styled.div`
   font-size: 30px;
   font-weight: bold;
   letter-spacing: 5px;
-  color: ${p => p.found ? 'green' : 'red'};
+  color: ${p => p.found ? '#75d075' : '#cc0000'};
 `;
 
 export const Validity = styled.div`
+  font-size: 13px;
   & {
-    color: ${p => p.found ? 'green' : 'red'};
+    color: ${p => p.found ? '#7ab17a' : '#ff8181'};
   };
   &:after {
     content: '${p => p.found ? 'valid' : 'invalid'}';
@@ -67,4 +68,37 @@ export const ClearWrapper = styled.div`
   cursor: pointer;
   width: 130px;
   margin-left: 215px;
+  margin-top: 20px;
+  color: #c1c1c1;
+
+  &:hover {
+    color: #b3b3b3;
+  }
+
+`
+export const ClearWord = styled.div`
+  font-size: 12px;
+  font-weight: 500;
+  align-self: center;
+`
+
+export const ClearX = styled.div`
+  background: #c1c1c1;
+  border-radius: 50%;
+  width: 30px;
+  margin-left: 8px;
+
+  &:hover {
+    background: #b3b3b3;
+  }
+`
+export const InnerX = styled.div`
+  position: relative;
+  top: 5px;
+  left: 12px;
+  font-size: 19px;
+  font-family: sans-serif;
+  color: #e8e8e8;
+  transform: scale(1.4,1);
+  font-weight: 300;
 `
