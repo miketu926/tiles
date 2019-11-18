@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { TileWrapper } from './TileStyles';
-import { removeLetter } from '../util/helpful_functions';
+import { removeLetter } from '../../util/helpful_functions';
 
 function Tile({ letter, selectedTiles, setSelectedTiles, wordFound, clear, setClear }) {
   const [selected, setSelected] = useState(false);

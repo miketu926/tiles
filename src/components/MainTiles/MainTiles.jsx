@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Tile from './Tile';
+import Tile from '../Tile/Tile';
 import {
   MainWrapper, Board,
   InputWrapper, Selection,
@@ -8,9 +8,9 @@ import {
 } from './MainTilesStyles';
 
 function MainTiles() {
-  const testBoard1 = require('../util/test_board_1.json').board;
-  const testBoard2 = require('../util/test_board_2.json').board;
-  const dictionary = require('../util/dictionary.json').words;
+  const testBoard1 = require('../../util/test_board_1.json').board;
+  const testBoard2 = require('../../util/test_board_2.json').board;
+  const dictionary = require('../../util/dictionary.json').words;
   const set = new Set(dictionary);
 
   //set initial board state with testBoard1 or testBoard2
