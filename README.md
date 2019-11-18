@@ -1,68 +1,62 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Tiles
 
-## Available Scripts
+## Table of contents
+* [Installation](#installation)
+* [Technologies](#technologies)
+* [Code Snippets](#code-snippets)
 
-In the project directory, you can run:
+## Installation
+  * `npm install` to install all dependencies (React & Styled Components)
+  * `npm start` to start localhost:3000 react local server
 
-### `npm start`
+## Technologies
+  * React
+    * React hooks (useState, useEffect)
+  * Styled Components
+  * HTML/CSS
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Code Snippets
+Code snippet of react hook useEffect to first render the board and detect from a dictionary set if the word is found.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+```javascript
+  useEffect(() => {
+    setRenderBoard(tiles.map((letter, i) => {
+      return <Tile
+        key={i} idx={i}
+        letter={letter}
+        selectedTiles={selectedTiles}
+        setSelectedTiles={setSelectedTiles}
+        wordFound={wordFound}
+        clear={clear}
+        setClear={setClear}
+      />
+    }));
 
-### `npm test`
+    if (set.has(selectedTiles.join("").toLowerCase())) setWordFound(true);
+    if (!set.has(selectedTiles.join("").toLowerCase())) setWordFound(false);
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+  }, [selectedTiles, wordFound])
+```
 
-### `npm run build`
+A snippet of how styling is handled through styled components by passing down props wordFound and selected in order to dynamically style for word validity.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```javascript
+  export const TileWrapper = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+    font-family: Arial, Helvetica, sans-serif;
+    text-shadow: -1px -1px 2px gray;
+    font-size: 28px;
+    font-weight: bold;
+    color: white;
+    border: ${p => p.wordFound && p.selected ? '2px solid #628a33' : '2px solid #cc0000'};
+    background-image: ${p => p.wordFound && p.selected ? 'linear-gradient(#b5f36d, #628a33)'
+      : p.selected ? 'linear-gradient(#ff4c4c, #840000)' : 'linear-gradient(#FFCA28, #FB8C00)'};
+    border-radius: 10px;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+  `;
+```
